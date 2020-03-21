@@ -2,12 +2,7 @@ import numpy as np
 np.random.seed(0)
 from sklearn.metrics import mean_squared_error, accuracy_score
 
-def test_regression_model(model, Nfeat=100, Mtrain=150, Mtest=150): 
-    W = np.random.rand(Nfeat+1)
-    trainX = np.c_[np.random.rand(Mtrain, Nfeat), np.ones(Mtrain)]
-    trainY = np.matmul(trainX, W)
-    testX = np.c_[np.random.rand(Mtest, Nfeat), np.ones(Mtest)]
-    testY = np.matmul(testX, W)
+def test_regression_model(model, trainX, trainY, testX, testY):
     model.fit(trainX, trainY)
     y_pred = model.predict(testX)
     acc = model.score(testY, y_pred)
@@ -22,6 +17,14 @@ def test_regression_model(model, Nfeat=100, Mtrain=150, Mtest=150):
     assert (acc <= 1.0 and acc1 == 1 and acc2 == 0), 'Wrong implementation of reg.score()'
     assert (acc >= 0.5), 'Your code or parameters are not good even for a linear dependency'
     return
+
+def generate_regression_data(Nfeat=100, Mtrain=150, Mtest=150):
+    W = np.random.rand(Nfeat+1)
+    trainX = np.c_[np.random.rand(Mtrain, Nfeat), np.ones(Mtrain)]
+    trainY = np.matmul(trainX, W)
+    testX = np.c_[np.random.rand(Mtest, Nfeat), np.ones(Mtest)]
+    testY = np.matmul(testX, W)
+    return trainX, trainY, testX, testY
 
 def generate_data(n_features=100, n_train_samples=150, n_test_samples=150, 
                   is_regression=True, seed=0):
