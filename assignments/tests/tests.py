@@ -1,6 +1,7 @@
 import numpy as np
 np.random.seed(0)
 from sklearn.metrics import mean_squared_error, accuracy_score
+from sklearn.neighbors import KNeighborsClassifier
 
 def test_regression_model(model, trainX, trainY, testX, testY):
     model.fit(trainX, trainY)
@@ -59,9 +60,25 @@ def test_score(model):
         print('score test passed')  
 
 def test_kneighbors(model):
-    #is_approx =  'approx' in str(type(model))
-    #if not is_approx:
-    print('kneighbors test passed')
+    trainX, trainY, testX, testY = generate_data(is_regression=False)
+    is_approx =  'approx' in str(type(model))
+    if not is_approx:
+        sklearn_model = KNeighborsClassifier(n_neighbors=1, weights='uniform', algorithm='brute')
+        
+        sklearn_model.fit(trainX, trainY)
+        sk_neigh_dist, sk_neigh_indarray = sklearn_model.kneighbors(testX[:1], n_neighbors=1)
+        
+        model.fit(trainX, trainY)
+        neigh_dist, neigh_indarray = model.kneighbors(testX[:1], n_neighbors=1)
+        
+        condition1 = type(sk_neigh_dist[0, 0]) == type(neigh_dist[0, 0])
+        condition2 = type(sk_neigh_indarray[0, 0]) == type(neigh_indarray[0, 0]) 
+        assert (condition1 and condition2), 'Wrong output type'
+        condition = (np.sum(np.abs(np.array(neigh_indarray) - sk_neigh_indarray)) == 0)
+        message = 'Wrong nearest neighbor search'
+        print(neigh_indarray, sk_neigh_indarray)
+        assert condition, message
+        print('kneighbors test passed')
 
 def accuracy_test(model):
     print('accuracy test passed')
