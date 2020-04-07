@@ -14,7 +14,7 @@ def test_regression_model(model, trainX, trainY, testX, testY):
     y2 = np.array([1, 0, 1, 0])
     acc2 = model.score(y2, y1)
     assert (trainX.shape[1] == model.W.shape[0]), 'Number of features (including feature "1") and length of model.W are not the same'
-    assert (acc <= 1.0 and acc1 == 1 and acc2 == 0), 'Wrong implementation of reg.score()'
+    assert (acc <= 1.0 and acc1 == 1 and abs(acc2) < 0.1), 'Wrong implementation of reg.score()'
     assert (acc >= 0.5), 'Your code or parameters are not good even for a linear dependency'
     return
 
