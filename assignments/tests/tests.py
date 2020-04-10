@@ -66,10 +66,10 @@ def test_kneighbors(model):
         sklearn_model = KNeighborsClassifier(n_neighbors=1, weights='uniform', algorithm='brute')
         
         sklearn_model.fit(trainX, trainY)
-        sk_neigh_dist, sk_neigh_indarray = sklearn_model.kneighbors(testX[:1], n_neighbors=1)
+        sk_neigh_dist, sk_neigh_indarray = sklearn_model.kneighbors(trainX[:1], n_neighbors=1)
         
         model.fit(trainX, trainY)
-        neigh_dist, neigh_indarray = model.kneighbors(testX[:1], n_neighbors=1)
+        neigh_dist, neigh_indarray = model.kneighbors(trainX[:1], n_neighbors=1)
         
         condition1 = type(sk_neigh_dist[0, 0]) == type(neigh_dist[0, 0])
         condition2 = type(sk_neigh_indarray[0, 0]) == type(neigh_indarray[0, 0]) 
