@@ -1,4 +1,4 @@
-# Практику по ЭВМ. Введение в Python
+# Практикум по ЭВМ. Введение в Python
 
 [Распределение задач и оценки](https://docs.google.com/spreadsheets/d/1ahxdzLJ1PtfgvLFY549vYONwjlfX8zZQFZxN_RGBARI/edit?usp=sharing)
 ## Первое задание
