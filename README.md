@@ -33,7 +33,7 @@
 
  ### <a name="en" /> EN version
 
-# Workshop on computers. Introduction to Python
+# Seminar on informatics. Introduction to Python
 
 ## Time and place
 Spring semester, 2020 at the Branch of Lomonosov Moscow State University in Tashkent
